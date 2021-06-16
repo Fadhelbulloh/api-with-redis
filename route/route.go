@@ -35,8 +35,13 @@ func basicServicePostgres(c *gin.Context) {
 		return
 	}
 
+	// create key for radist
 	hashQuery := util.Hashing(byteParam, "basic:search")
+
+	// open reedis connection
 	RedisCache := redisRepo.NewClient()
+
+	// getting data from redist
 	client, redisResult := RedisCache.Get(hashQuery)
 
 	// defer Closing client after func executed
@@ -84,8 +89,13 @@ func basicService(c *gin.Context) {
 		return
 	}
 
-	hashQuery := util.Hashing(byteParam, "basic:search")
+	// create key for radist
+	hashQuery := util.Hashing(byteParam, "basic:static")
+
+	// open reedis connection
 	RedisCache := redisRepo.NewClient()
+
+	// getting data from redist
 	client, redisResult := RedisCache.Get(hashQuery)
 
 	// defer Closing client after func executed

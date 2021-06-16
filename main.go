@@ -38,7 +38,7 @@ func main() {
 
 	go func() {
 		// setting gin mode
-		gin.SetMode(gin.DebugMode)
+		gin.SetMode(gin.ReleaseMode)
 		router := gin.Default()
 		router.Use(cors.Default())
 

@@ -3,6 +3,8 @@ package redisRepo
 import (
 	"encoding/json"
 	"fmt"
+	"os"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -16,12 +18,13 @@ type redisClient struct {
 
 // Open new Redis Client
 func NewClient() *redisClient {
-
+	db, _ := strconv.Atoi(os.Getenv("REDISDB"))
 	client := redis.NewClient(&redis.Options{
-		Addr:     "",
-		Password: "",
-		DB:       0,
+		Addr:     os.Getenv("REDISADDR"),
+		Password: os.Getenv("REDISPASS"),
+		DB:       db,
 	})
+
 	return &redisClient{client: client}
 }
 
@@ -60,6 +63,7 @@ func (rds *redisClient) Set(duration time.Duration, hashQuery string, response i
 			return true
 		}
 
+		golog.Info("setting to redis")
 	}
 	return false
 }
@@ -79,6 +83,7 @@ func (rds *redisClient) SetUnlimited(hashQuery string, response interface{}) boo
 			return true
 		}
 
+		golog.Info("setting to redis")
 	}
 	return false
 }
