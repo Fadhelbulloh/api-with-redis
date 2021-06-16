@@ -17,6 +17,8 @@ API :
 - Redis - Caching system
 
 ## ENV needed
+
+for postgres
 ```ssh
 HOST
 USERPG
@@ -24,5 +26,12 @@ PASSWORD
 DB
 PGPORT
 SSLMODE
+```
+
+for redis
+```ssh
+REDISADDR
+REDISDB
+REDISPASS
 ```
 
