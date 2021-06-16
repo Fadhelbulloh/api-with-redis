@@ -1,32 +1,20 @@
 package service
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/Fadhelbulloh/api-with-redis/model/param"
 	"github.com/Fadhelbulloh/api-with-redis/model/response"
-	"github.com/kataras/golog"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"github.com/Fadhelbulloh/api-with-redis/repository/postgres"
 )
 
 // BasicGetFromPostgres get all service from postgres
 func BasicGetFromPostgres(params param.UserM) response.Response {
 	var response response.Response
 
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Shanghai",
-		os.Getenv("HOST"), os.Getenv("USERPG"), os.Getenv("PASSWORD"), os.Getenv("DB"), os.Getenv("PGPORT"), os.Getenv("SSLMODE"))
+	db := postgres.PostgresConn()
 
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	if err != nil {
-		golog.Error("failed to connect database")
-		response.Failed("failed to connect database")
-		return response
-	}
 	var user_m param.UserM
-	search := db.Find(&user_m)
-	if search.Error != nil {
+	search, err := db.Get(user_m)
+	if err != nil {
 		response.Failed("error db execution")
 		return response
 	}

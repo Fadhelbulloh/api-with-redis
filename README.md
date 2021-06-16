@@ -1,4 +1,4 @@
-# Postgre and Redis Service
+# Postgres and Redis Service
 
 implementing caching system in postgre REST API
 
