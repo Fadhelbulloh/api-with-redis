@@ -1,7 +1,9 @@
 # Postgres and Redis Service
 
 implementing caching system in postgre REST API
-
+Port : 7200
+API : - /basic/postgres
+      - /basic/static
 ## Tech
 
 - Golang - programming language
@@ -17,4 +19,5 @@ PASSWORD
 DB
 PGPORT
 SSLMODE
-````
+```
+
