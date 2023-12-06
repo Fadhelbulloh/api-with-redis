@@ -13,6 +13,7 @@ import (
 	"github.com/subosito/gotenv"
 )
 
+// init for environment
 func init() {
 	log.SetFlags(log.Lshortfile | log.LstdFlags)
 
